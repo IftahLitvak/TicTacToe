@@ -16,8 +16,26 @@
         <div id="header-title">Tic Tac Toe</div>
     </div>
     <div class="main">
-        <div class="main-text"></div>
+        <div class="welcome"><strong>Welcome To Tic Tac Toe!</strong> <br> Please Choose Game Mode</div>
+        <div class="modes">
+            <div class="pvp">
+                <button id="pvp" class="bttn">Player 1 VS Player 2</button>
+            </div>
+            <div class="ai">
+                <button id="ai" class="bttn">Player VS AI</button>
+            </div>
+        </div>
         <div class="content"></div>
+        <div class="main-text">
+            <div class="current-turn">
+                <span>Current Turn:</span>
+                <span class="x-turn"></span>
+            </div>
+            <div class="round-winner"></div>
+            <div class="restart" style="visibility: hidden;">
+                <button id="restart" class="bttn">Play Again</button>
+            </div>
+        </div>
     </div>
 </body>
 </html>

@@ -8,10 +8,48 @@ let currentTurn = '';
 let winner = '';
 let turnNumber = 0;
 let currentPos = -1;
+let gameMode = 0; // '0' - Main Menu :: '1' - PVP :: '2' - AI
 
 const contentDiv = document.querySelector('.content');
+const aiBtn = document.querySelector('#ai');
+const pvpBtn = document.querySelector('#pvp');
+aiBtn.addEventListener('click', changeGameMode);
+pvpBtn.addEventListener('click', changeGameMode);
+const turnSpan = document.querySelector('.x-turn');
+const restartDiv = document.querySelector('.restart');
+restartDiv.addEventListener('click', restartGame);
 
-renderBoard(currentPos);
+function restartGame(){
+    boardArr = ['','','','','','','','',''];
+    xPositions = [];
+    oPositions = [];
+    currentTurn = '';
+    winner = '';
+    turnNumber = 0;
+    currentPos = -1;
+    gameMode = 0;
+    aiBtn.style.visibility = 'visible';
+    pvpBtn.style.visibility = 'visible';
+    contentDiv.style.visibility = 'hidden';
+    contentDiv.innerHTML = '';
+    restartDiv.style.visibility = 'hidden';
+    turnSpan.classList.remove('o-turn');
+    turnSpan.classList.add('x-turn');
+}
+
+
+function changeGameMode(e){
+    if(e.target.id == 'ai'){
+        gameMode = 2;
+    }
+    else if(e.target.id == 'pvp'){
+        gameMode = 1;
+    }
+    renderBoard(currentPos);
+    aiBtn.style.visibility = 'hidden';
+    pvpBtn.style.visibility = 'hidden';
+}
+
 
 const gameBoard = (() => {
     const drawX = (pos) => boardArr[pos] = 'X';
@@ -82,6 +120,7 @@ function renderBoard(pos){
             boxDiv.addEventListener('click', makeMove);
         });
         turnNumber ++;
+        contentDiv.style.visibility = 'visible';
     }
     else {
         let boxId = '#sign' + pos;
@@ -97,10 +136,12 @@ function renderBoard(pos){
         }
         gameBoard.gameOver();
         if(winner != ''){
-            document.querySelector('.main-text').innerHTML = `The Winner is ${winner}`;
+            document.querySelector('.round-winner').innerHTML = `The Winner is ${winner}`;
+            restartDiv.style.visibility = 'visible';
         }
         else if (turnNumber == 10){
-            document.querySelector('.main-text').innerHTML = 'It is a Tie';
+            document.querySelector('.round-winner').innerHTML = 'It is a Tie';
+            restartDiv.style.visibility = 'visible';
         }
     }
 
@@ -123,9 +164,13 @@ function makeMove(e){
     if (gameBoard.isEmpty(pos)){
         if(turnNumber%2 == 0){
             currentTurn = 'O';
+            turnSpan.classList.remove('o-turn');
+            turnSpan.classList.add('x-turn');
         }
         else {
             currentTurn = 'X';
+            turnSpan.classList.add('o-turn');
+            turnSpan.classList.remove('x-turn');
         }
         players.forEach(player => {
             if (player[0] == currentTurn){
