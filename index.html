@@ -21,13 +21,39 @@
             <div class="pvp">
                 <button id="pvp" class="bttn">Player 1 VS Player 2</button>
             </div>
+            <div class="players-names" style="visibility: hidden;">
+                <label for="player1-name">Player X Name:
+                    <input type="text" name="player1-name" id="player1-name" placeholder="Player1">
+                </label>
+                <label for="player2-name">Player O Name:
+                    <input type="text" name="player2-name" id="player2-name" placeholder="Player2">
+                </label>
+            </div>
             <div class="ai">
                 <button id="ai" class="bttn">Player VS AI</button>
             </div>
+            <div class="player-name" style="visibility: hidden;">
+                <label for="playerVSai-name">Player 1 Name:
+                    <input type="text" name="playerVSai-name" id="playerVSai-name" placeholder="Player1">
+                </label>
+            </div>
+            <div class="mid" style="visibility: hidden;">
+                <div class="mark-text">Mark Select:</div>
+                <label class="rocker">
+                  <input class="mark-select" type="checkbox" checked>
+                  <span class="switch-left">X</span>
+                  <span class="switch-right">O</span>
+                </label>
+            </div>
+            <div class="start-game" style="visibility: hidden;">
+                <button id="start-game" class="bttn">Start Game</button>
+            </div>
+            <div class="error-message"></div>
         </div>
         <div class="content"></div>
         <div class="main-text">
-            <div class="current-turn">
+            <div class="players" style="visibility: hidden;"></div>
+            <div class="current-turn" style="visibility: hidden;">
                 <span>Current Turn:</span>
                 <span class="x-turn"></span>
             </div>
